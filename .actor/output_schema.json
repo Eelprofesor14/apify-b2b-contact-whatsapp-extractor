@@ -1,0 +1,16 @@
+{
+  "actorOutputSchemaVersion": 1,
+  "title": "B2B Contact & WhatsApp Enrichment Output",
+  "properties": {
+    "leads": {
+      "type": "string",
+      "title": "Enriched B2B Leads Dataset",
+      "template": "{{links.apiDefaultDatasetUrl}}/items"
+    },
+    "summary": {
+      "type": "string",
+      "title": "Run Summary (JSON for MCP Agents)",
+      "template": "{{links.apiDefaultKeyValueStoreUrl}}/records/SUMMARY"
+    }
+  }
+}

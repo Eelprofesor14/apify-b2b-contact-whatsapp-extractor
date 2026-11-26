@@ -1,0 +1,54 @@
+{
+  "actorSpecification": 1,
+  "fields": {
+    "type": "object",
+    "properties": {
+      "domain": { "type": "string", "description": "Normalized company domain" },
+      "url": { "type": "string", "description": "Final resolved URL" },
+      "status": { "type": "string", "description": "ok or error reason" },
+      "company_name": { "type": "string", "description": "Detected organization name from JSON-LD or title" },
+      "title": { "type": "string", "description": "HTML page title" },
+      "description": { "type": "string", "description": "Meta description" },
+      "emails": { "type": "array", "items": { "type": "string" }, "description": "Verified deduplicated business emails" },
+      "whatsapp": { "type": "array", "items": { "type": "string" }, "description": "WhatsApp Business numbers/links" },
+      "phones": { "type": "array", "items": { "type": "string" }, "description": "Normalized phone numbers" },
+      "tax_ids": { "type": "array", "items": { "type": "string" }, "description": "Detected tax IDs (CUIT, RFC, RUT, NIF/CIF, CNPJ)" },
+      "linkedin": { "type": "array", "items": { "type": "string" } },
+      "twitter_x": { "type": "array", "items": { "type": "string" } },
+      "instagram": { "type": "array", "items": { "type": "string" } },
+      "facebook": { "type": "array", "items": { "type": "string" } },
+      "github": { "type": "array", "items": { "type": "string" } },
+      "pages_checked": { "type": "integer", "description": "Total pages crawled for this domain" }
+    }
+  },
+  "views": {
+    "overview": {
+      "title": "B2B Leads Overview",
+      "transformation": {
+        "fields": [
+          "domain",
+          "company_name",
+          "emails",
+          "whatsapp",
+          "phones",
+          "tax_ids",
+          "linkedin",
+          "status"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "domain": { "label": "Domain", "format": "text" },
+          "company_name": { "label": "Company", "format": "text" },
+          "emails": { "label": "Emails", "format": "array" },
+          "whatsapp": { "label": "WhatsApp", "format": "array" },
+          "phones": { "label": "Phones", "format": "array" },
+          "tax_ids": { "label": "Tax IDs (LATAM/EU)", "format": "array" },
+          "linkedin": { "label": "LinkedIn", "format": "array" },
+          "status": { "label": "Status", "format": "text" }
+        }
+      }
+    }
+  }
+}

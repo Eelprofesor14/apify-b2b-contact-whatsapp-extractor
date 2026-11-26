@@ -1,0 +1,66 @@
+{
+  "title": "B2B Contact, WhatsApp & Tax ID Extractor Input",
+  "description": "Provide company domains or URLs to enrich with verified emails (including Cloudflare de-obfuscation), WhatsApp Business numbers, phones, social links, and LATAM/EU tax IDs. Optimized for batch enrichment and Model Context Protocol (MCP) AI agents.",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "domains": {
+      "title": "Company URLs or Domains",
+      "type": "array",
+      "description": "List of company websites or domains to extract B2B contact signals from (e.g., https://apify.com or example.com).",
+      "editor": "stringList",
+      "prefill": [
+        "https://apify.com"
+      ],
+      "minItems": 1
+    },
+    "checkContactPages": {
+      "title": "Crawl Contact, About & Legal Subpages",
+      "type": "boolean",
+      "description": "Automatically visits up to maxSubpagesPerDomain internal contact/about/legal pages (EN/ES/PT: /contact, /contacto, /nosotros, /aviso-legal, /fale-conosco).",
+      "default": true
+    },
+    "maxSubpagesPerDomain": {
+      "title": "Max Subpages per Domain",
+      "type": "integer",
+      "description": "Maximum number of internal contact or legal subpages to inspect per company domain.",
+      "default": 3,
+      "minimum": 0,
+      "maximum": 10
+    },
+    "onlyWithContacts": {
+      "title": "Only Output Leads with Email, Phone, or WhatsApp",
+      "type": "boolean",
+      "description": "When enabled, skips domains where no actionable contact channel (email, WhatsApp, or phone) was discovered.",
+      "default": false
+    },
+    "maxConcurrency": {
+      "title": "Max Concurrent Requests",
+      "type": "integer",
+      "description": "Number of company domains to process concurrently.",
+      "default": 8,
+      "minimum": 1,
+      "maximum": 25
+    },
+    "requestTimeoutSecs": {
+      "title": "Request Timeout (seconds)",
+      "type": "integer",
+      "description": "HTTP timeout per page fetch in seconds.",
+      "default": 15,
+      "minimum": 5,
+      "maximum": 60
+    },
+    "proxyConfiguration": {
+      "title": "Proxy Configuration",
+      "type": "object",
+      "description": "Optional Apify Proxy settings for protected websites.",
+      "editor": "proxy",
+      "default": {
+        "useApifyProxy": false
+      }
+    }
+  },
+  "required": [
+    "domains"
+  ]
+}
