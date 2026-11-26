@@ -141,6 +141,12 @@ async def main() -> None:
             proxy_config = await Actor.create_proxy_configuration(actor_proxy_input=proxy_cfg_raw)
 
         sem = asyncio.Semaphore(max_concurrency)
+        if hasattr(Actor, "charge"):
+            try:
+                await Actor.charge(event_name="actor-start", count=1)
+            except Exception:
+                pass
+
         tasks = [
             process_domain(
                 d,
@@ -154,6 +160,7 @@ async def main() -> None:
         ]
 
         pushed = 0
+        charged_events = 0
         with_contacts = 0
         for coro in asyncio.as_completed(tasks):
             record = await coro
@@ -166,6 +173,12 @@ async def main() -> None:
 
             await Actor.push_data(record)
             pushed += 1
+            if record["status"] == "ok" and hasattr(Actor, "charge"):
+                try:
+                    await Actor.charge(event_name="lead-enriched", count=1)
+                    charged_events += 1
+                except Exception:
+                    pass
             Actor.log.info(
                 f"[{record['status']}] {record['domain']} -> "
                 f"{len(record['emails'])} emails, {len(record['whatsapp'])} WhatsApp, "
@@ -176,6 +189,7 @@ async def main() -> None:
             "processed_domains": len(unique_domains),
             "pushed_records": pushed,
             "leads_with_contacts": with_contacts,
+            "ppe_charged_events": charged_events,
         }
         await Actor.set_value("SUMMARY", summary)
         Actor.log.info(f"Completed B2B enrichment: {summary}")

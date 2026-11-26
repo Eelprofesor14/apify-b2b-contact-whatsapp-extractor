@@ -1,0 +1,14 @@
+{
+  "events": {
+    "actor-start": {
+      "eventTitle": "Actor Start",
+      "eventDescription": "Flat initialization event per Actor run.",
+      "eventPriceUsd": 0.00005
+    },
+    "lead-enriched": {
+      "eventTitle": "B2B Domain Enriched",
+      "eventDescription": "Charged once per company domain processed and pushed to the output dataset.",
+      "eventPriceUsd": 0.01
+    }
+  }
+}

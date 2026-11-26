@@ -5,9 +5,9 @@
   "description": "Fast async B2B lead enrichment Actor for AI Agents (MCP) & sales pipelines. Extracts verified emails (including Cloudflare-protected & obfuscated), WhatsApp Business links, phones, social profiles, JSON-LD metadata, and LATAM/Spain tax IDs (CUIT, RFC, RUT, NIF/CIF, CNPJ).",
   "version": "1.0",
   "buildTag": "latest",
-  "defaultMemoryMbytes": 512,
+  "defaultMemoryMbytes": 256,
   "minMemoryMbytes": 256,
-  "maxMemoryMbytes": 2048,
+  "maxMemoryMbytes": 512,
   "meta": {
     "templateId": "python-start"
   },
